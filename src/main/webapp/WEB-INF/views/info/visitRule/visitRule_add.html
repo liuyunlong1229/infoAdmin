@@ -1,0 +1,30 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="visirRule_add_form" action="${rc.contextPath}/visitRule/add" class="easyui-form" method="post" data-options="novalidate:true" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>访问的时长:</td>
+	    			<td><input class="easyui-textbox" type="text" name="visitTime" data-options="required:true"></input>（分钟）</td>
+	    		</tr>
+	    		<tr>
+	    			<td>是否需要划到页底:</td>
+	    			<td>
+	    			   <select class="easyui-combobox"  style="width:100px" name="isEndofPage"  data-options="panelHeight:'auto'">
+		    				<option value="1">是</option>
+		    				<option value="0">否</option>
+	    				</select>
+	    			
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>划页的次数:</td>
+	    			<td><input class="easyui-textbox" type="text" name="crossPageCount"></input></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="visitRuleManager.saveVisitRule()">保存</a>
+	    </div>
+	    
+ </div>
+ <script type="text/javascript" src="${rc.contextPath}/static/js/modules/info/visitRule.js"></script>  

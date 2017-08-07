@@ -1,0 +1,28 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="user_changePwd_form" action="${rc.contextPath}/user/changePwd" class="easyui-form" method="post" data-options="novalidate:false">
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>原密码:</td>
+	    			<td>															
+	    			    <input class="easyui-textbox" type="text" name="password"  invalidMessage="原密码不正确"  data-options="required:true,validType:'remote[\'${rc.contextPath}/user/checkPwd\',\'password\']'"></input>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>新密码:</td>
+	    			<td><input class="easyui-textbox" type="text" id="newPassword" name="newPassword" data-options="required:true,validType:'password'" ></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>确认新密码:</td>
+	    			<td>
+	    			<input class="easyui-textbox" type="text" name="newPassword2" data-options="required:true,validType:'confirmPwd[\'newPassword\']'"></input>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="userManager.changePwd()">保存</a>
+	    </div>
+ </div>
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/user.js"></script>   
+ 

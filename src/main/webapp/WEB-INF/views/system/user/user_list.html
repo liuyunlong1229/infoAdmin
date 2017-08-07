@@ -1,0 +1,101 @@
+<#assign sec=JspTaglibs["/WEB-INF/tld/security.tld"] /> 
+
+<style>
+body{font: normal 16px/26px "Microsoft YaHei"}
+.searchDiv{width:100%;height:auto;background: white;}
+.searchDiv table {width:99%;height:auto;}
+.searchDiv table th{font: normal 16px/26px "Microsoft YaHei";font-weight:bold; width:20%;height: 25px;line-height: 25px;text-align: right;padding-right: 10px;}
+.searchDiv table td{width: 30%;height: 25px;line-height: 25px;text-align: left;padding-left: 10px;}
+.searchDiv input,.searchDiv select{width:200px;height: 20px;border-radius:5px;border: 1px solid #95B8E7;}
+
+</style>
+<div class="easyui-panel" data-options="fit:true">
+<div class="easyui-layout" fit="true">
+		<div class="searchDiv" region="north" border="false" style="width:100%;overflow: hidden">
+		  <form id="searchUserForm" action="${rc.contextPath}/user/list" >
+		   <table style="width:100%;overflow: hidden" >
+		   		<tr>
+		   			<th>用户名</th>
+		   			<td><input type="text" name="loginName"  id="loginName" /></td>
+		   			<th>性别</th>
+		   			<td>
+		   				<select name="sex" id="sex">
+		   					<option value=" "></option>
+		   					<option value="1">男</option>
+		   					<option value="0">女</option>
+		   				</select>
+		   			</td>
+		   		</tr>
+		   		
+		   		<tr>
+		   			<td colspan="4" style="text-align:center;">
+		   				<input type="button" value="查询" onclick="userManager.queryUsers()"/>
+		   				<input type="button" value="重置" onclick="userManager.clearQueryForm()"/>
+		   			</td>
+		   		</tr>
+		   
+		   </table>
+		   </form>
+		</div>
+
+     	<div region="center" border="false" >
+     	<table id="userdg" class="easyui-datagrid"  
+				data-options="
+					url:'${rc.contextPath}/user/list',
+					rownumbers:true,
+					pagination:true,
+					pageNumber:1,
+                 	pageSize:10,   
+					fit:true,
+					fitColumns:true,
+					singleSelect:true,
+					toolbar:'#userToolBar'">
+				<thead>
+					<tr>
+						<th data-options="field:'loginName',width:'200',halign:'center',align:'left'">登录名</th>
+						<th data-options="field:'realName',width:'200',halign:'center',align:'left'">真实姓名</th>
+						<th data-options="field:'sex',width:'100',halign:'center',align:'left',
+						
+						formatter: function(value,row,index){
+							if (value=='1'){
+								return '男';
+							} else  if(value=='0'){
+								return '女';
+							}else {
+								return '未知';
+							}
+						}
+						
+						">性别</th>
+						<th data-options="field:'telephone',width:'200',halign:'center',align:'left'">联系电话</th>
+						<th data-options="field:'email',width:'200',halign:'center',align:'left'">Emai邮箱</th>
+						<th data-options="field:'address',width:'200',halign:'center',align:'left'">联系地址</th>
+					</tr>
+				</thead>
+			</table>
+      </div>
+
+      <div id="userToolBar">
+      
+       <@sec.hasPermission name="USER_ADD">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="userManager.showAddUserView()">新增</a>
+       </@sec.hasPermission>
+       
+       <@sec.hasPermission name="USER_UPDATE">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'" onclick="userManager.showUpdateUserView()">修改</a>
+       </@sec.hasPermission>
+       
+       <@sec.hasPermission name="USER_DEL">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="userManager.delUser()">删除</a>
+       </@sec.hasPermission> 
+       
+       <@sec.hasPermission name="USER_RESETPWD">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="userManager.resetPwd()">密码重置</a>
+       </@sec.hasPermission> 
+      </div>
+  </div>
+  
+
+</div>
+
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/user.js"></script>  

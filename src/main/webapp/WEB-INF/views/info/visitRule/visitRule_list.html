@@ -1,0 +1,77 @@
+<#assign sec=JspTaglibs["/WEB-INF/tld/security.tld"] /> 
+
+<style>
+body{font: normal 16px/26px "Microsoft YaHei"}
+.searchDiv{width:100%;height:auto;background: white;}
+.searchDiv table {width:99%;height:auto;}
+.searchDiv table th{font: normal 16px/26px "Microsoft YaHei";font-weight:bold; width:20%;height: 25px;line-height: 25px;text-align: right;padding-right: 10px;}
+.searchDiv table td{width: 30%;height: 25px;line-height: 25px;text-align: left;padding-left: 10px;}
+.searchDiv input,.searchDiv select{width:200px;height: 20px;border-radius:5px;border: 1px solid #95B8E7;}
+
+</style>
+<div class="easyui-panel" data-options="fit:true">
+<div class="easyui-layout" fit="true">
+		<div class="searchDiv" region="north" border="false" style="width:100%;overflow: hidden">
+		  <form id="searchVisitRuleForm" action="${rc.contextPath}/visitRule/list" >
+		   <table style="width:100%;overflow: hidden" >
+		   		<tr>
+		   			<th>编码</th>
+		   			<td><input type="text" name="code"  id="code" /></td>
+		   		</tr>
+		   		
+		   		<tr>
+		   			<td colspan="2" style="text-align:center;">
+		   				<input type="button" value="查询" onclick="visitRuleManager.queryRules()"/>
+		   				<input type="button" value="重置" onclick="visitRuleManager.clearQueryForm()"/>
+		   			</td>
+		   		</tr>
+		   </table>
+		   </form>
+		</div>
+
+     	<div region="center" border="false" >
+     	<table id="visitRuleListGrid" class="easyui-datagrid"  
+				data-options="
+					url:'${rc.contextPath}/visitRule/list',
+					rownumbers:true,
+					pagination:true,
+					pageNumber:1,
+                 	pageSize:10,   
+					fit:true,
+					fitColumns:true,
+					singleSelect:true,
+					toolbar:'#visitRuleToolBar'">
+				<thead>
+					<tr>
+						<th data-options="field:'code',width:'200',halign:'center',align:'left'">规则编码</th>
+						<th data-options="field:'visitTime',width:'200',halign:'center',align:'left'">访问时长（分钟）</th>
+						<th data-options="field:'crossPageCount',width:'200',halign:'center',align:'left'">划页的次数</th>
+						<th data-options="field:'isEndofPage',width:'100',halign:'center',align:'left',
+						
+						formatter: function(value,row,index){
+							if (value=='1'){
+								return '是';
+							} else  if(value=='0'){
+								return '否';
+							}else {
+								return '';
+							}
+						}
+						
+						">是否访问到页底</th>
+					</tr>
+				</thead>
+			</table>
+      </div>
+
+      <div id="visitRuleToolBar">
+       <@sec.hasPermission name="RULE_ADD">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="visitRuleManager.showAddRuleView()">新增</a>
+       </@sec.hasPermission>
+      </div>
+  </div>
+  
+
+</div>
+
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/info/visitRule.js"></script>  

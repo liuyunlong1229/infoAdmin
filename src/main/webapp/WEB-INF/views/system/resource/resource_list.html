@@ -1,0 +1,82 @@
+<#assign sec=JspTaglibs["/WEB-INF/tld/security.tld"] /> 
+<div class="easyui-panel" data-options="fit:true">
+<div class="easyui-layout" fit="true">
+    <div region="center" border="false" >
+     	<table id ="tg" title="" class="easyui-treegrid" fit="true"
+			data-options="
+				url: '${rc.contextPath}/resource/list',
+				rownumbers: true,
+				idField: 'id',
+				treeField: 'name',
+				onContextMenu : resourceManager.showContextMenu,
+				showFooter : true">
+		<thead>
+			<tr>
+				<th data-options="field:'name'" width="20%">资源名称</th>
+				<th data-options="field:'resourceType'" width="15%">资源类型</th>
+				<th data-options="field:'label'" width="20%">资源标识</th>
+				<th data-options="field:'resourcePath'" width="40%">资源路径</th>
+			</tr>
+		</thead>
+	</table>
+   </div>
+  </div>
+</div>
+
+
+<!-- 根节点菜单 -->
+<div id="root_menu" class="easyui-menu" style="width:120px;">
+      <@sec.hasPermission name="RESOURCE_ADD">
+		<div onclick="resourceManager.appendMenu()" data-options="iconCls:'icon-add'">添加子节点</div>
+	  </@sec.hasPermission>
+	  <div class="menu-sep"></div>
+	  <div onclick="resourceManager.collapse()">收缩</div>
+	  <div onclick="resourceManager.expand()">展开</div>
+</div>
+
+
+
+<!-- 没有子节点菜单/模块 -->	
+<div id="menu_nochild" class="easyui-menu" style="width:120px;">
+	<@sec.hasPermission name="RESOURCE_UPDATE">
+	<div onclick="resourceManager.updateMenu()" data-options="iconCls:'icon-edit'">修改/查看</div>
+	</@sec.hasPermission>
+	
+	<@sec.hasPermission name="RESOURCE_ADD">
+	<div onclick="resourceManager.appendMenu()" data-options="iconCls:'icon-add'">添加子节点</div>
+	</@sec.hasPermission>
+	
+	<@sec.hasPermission name="RESOURCE_DEL">
+	<div onclick="resourceManager.removeMenu()" data-options="iconCls:'icon-remove'">删除该节点</div>
+	</@sec.hasPermission>
+</div>
+
+<!-- 有子节点菜单/模块 -->	
+<div id="menu_child" class="easyui-menu" style="width:120px;">
+    <@sec.hasPermission name="RESOURCE_UPDATE">
+	<div onclick="resourceManager.updateMenu()" data-options="iconCls:'icon-edit'">修改/查看</div>
+	</@sec.hasPermission>
+	
+	<@sec.hasPermission name="RESOURCE_ADD">
+	<div onclick="resourceManager.appendMenu()" data-options="iconCls:'icon-add'">添加子节点</div>
+	</@sec.hasPermission>
+	
+	<div class="menu-sep"></div>
+	<div onclick="resourceManager.collapse()">收缩</div>
+	<div onclick="resourceManager.expand()">展开</div>
+</div>
+
+<!-- 按钮菜单 -->	
+<div id="menu_button" class="easyui-menu" style="width:120px;">
+
+	<@sec.hasPermission name="RESOURCE_UPDATE">
+	<div onclick="resourceManager.updateMenu()" data-options="iconCls:'icon-edit'">修改/查看</div>
+	</@sec.hasPermission>
+	
+	<@sec.hasPermission name="RESOURCE_DEL">
+	<div onclick="resourceManager.removeMenu()" data-options="iconCls:'icon-remove'">删除该节点</div>
+	</@sec.hasPermission>
+	
+</div>
+
+ <script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/resource.js"></script>   

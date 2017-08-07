@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户登录</title>
+<style type="text/css">
+
+.login-div{ 
+   border:1px solid black; 
+   width:550px;  
+   height:413px;  
+   position:absolute;  
+   left:50%;  
+   top:50%;  
+   margin:-206px 0 0 -275px;
+   background:url("${rc.contextPath}/static/images/loginbg.png") no-repeat;
+} 
+
+ .verticalDiv  *{
+	vertical-align:middle;
+}
+
+.login-div h2{ 
+	height:30px;
+    line-height:30px;
+    color:#f00; 
+    font-size:12px; 
+    font-weight:normal; 
+    padding-left:30px; 
+    border-radius:5px; 
+    background:url(${rc.contextPath}/static/images/validatebox_warning.png) no-repeat 7px 5px
+    }
+
+
+</style>
+
+<link rel="stylesheet" type="text/css"  id="themesfile" href="${rc.contextPath}/static/css/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/css/jquery-easyui-1.4/themes/icon.css">
+<!-- <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/css/zay.css"> -->
+<script type="text/javascript" src="${rc.contextPath}/static/js/jquery-easyui-1.4/jquery.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" id="lanauagefile" src="${rc.contextPath}/static/js/jquery-easyui-1.4/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+
+var loginName=null;
+var password=null;
+
+function refImg(){   
+	$("#kaptchaImg").attr("src","showKaptcha?data="+Math.random());
+} 
+function showErrorMsg(msg){
+	$(".msgtips").show();
+	$(".msgtips").text(msg);
+}
+
+function login(){
+	loginName=$("#loginName").val();
+	if(!loginName){
+		showErrorMsg("登录名不能为空！");
+		return;
+	}
+	password=$("#password").val();
+	if(!password){
+		showErrorMsg("密码不能为空！");
+		return;
+	}
+	var kaptcha=$("#katcha").val();
+	if(!kaptcha){
+		showErrorMsg("验证码不能为空！");
+		return;
+	}
+	
+	
+	var loginForm=$("#loginForm");
+	
+	$.ajax({
+		url : loginForm.attr("action"),
+		dataType:'json',
+	    type:'post',
+		data : loginForm.serialize(),
+		success : function(result) {
+		 if(result.code=='1'){
+			 var remenberMe= document.getElementById("remenberMe").checked;
+			 //var remenberMe=$("#remenberMe").attr('checked');
+			 if(remenberMe){
+				 $.cookie("loginName", loginName, {path: '/',expires: 7});
+				 $.cookie("password", password, {path: '/',expires: 7});
+			 }
+			 window.location.replace('${rc.contextPath}/index/init'); 
+		 }else{
+			 showErrorMsg(result.errorMsg);
+		 }
+		}
+	});
+	
+}
+
+/* 
+ $(function() {
+	 
+	 alert('年后');
+	var loginName = $.cookie("loginName"); 
+	if (loginName) {
+		
+		$('#loginName').textbox('setValue',loginName);
+		//$("#loginName").val(loginName); 这种方法设置值显示不出来
+	}
+		
+	var password = $.cookie("password"); 
+	if (password) {
+		$('#password').textbox('setValue',password);
+		//$("#password").val(password);
+	}
+});  */
+
+
+
+
+
+
+</script>
+
+</head>
+
+<body style="background: url('${rc.contextPath}/static/images/bg.jpg') no-repeat;overflow: hidden;">
+  <form id="loginForm" action="${rc.contextPath}/login" method="post">
+    <div  class="login-div" >
+	
+	
+		<div style="margin-bottom:20px ;margin-top:100px;margin-left:150px">
+			<input class="easyui-textbox"  id="loginName" name="loginName" style="width:250px;height:30px" data-options="iconCls:'icon-man',iconWidth:38">
+		</div>
+		<div style="margin-bottom:20px ;margin-left:150px">
+			<input class="easyui-textbox" id="password"  name="password" style="width:250px;height:30px"  type="password"  data-options="iconCls:'icon-lock',iconWidth:38">
+		</div>
+		<div class="verticalDiv"  style="margin-bottom:10px ;margin-left:150px" >
+		   <input  name="katcha"  id="katcha"  style="width:138px;height:24px;border: 1px solid #95B8E7;border-radius: 5px 5px 5px 5px;" />
+		   <img  id="kaptchaImg"  src="showKaptcha" onclick="refImg()" style="width: 100px;height: 30px;border-radius: 2px;border:0px">
+		 </div>
+		<div class="verticalDiv"  style="margin-bottom:10px ;margin-left:150px" >
+			<input type="checkbox" id="remenberMe" name="remenberMe"  Style="zoom: 100%" >
+			<span style="color: #444;font-size: 12px">记住密码一星期</span>
+		</div>
+		<div style=";margin-left:150px;margin-bottom: 20px">
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"  style="width:250px;height:30px"  onclick="login()">
+				<span style="font-size:14px;">登录</span>
+			</a>
+		</div>
+		
+		<div style="margin-left:150px;height:40px">
+		  <h2 class="msgtips" style="display: none"></h2>
+		</div>
+   </div>
+  </form>
+</body>
+</html>

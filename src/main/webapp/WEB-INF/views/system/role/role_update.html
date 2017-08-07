@@ -1,0 +1,83 @@
+<div class="easyui-layout"  fit='true'>
+    <div data-options="region:'center'">   
+        <div class="easyui-layout" data-options="fit:true">   
+            <div data-options="region:'west',collapsed:false" style="width:180px">
+               <div id="tt" class="easyui-tree" ></div>
+            </div>   
+            <div data-options="region:'center'">
+                <form id="role_update_form" class="easyui-form" method="post" data-options="novalidate:true">
+		        <input type="hidden" name="resourceIds"  id="resourceIds" />
+		        <input type="hidden" name="id" value="${role.id}" />
+		    	<table cellpadding="5">
+		    		<tr>
+		    			<td>角色名:</td>
+		    			<td>
+		    			    <input class="easyui-textbox" type="text" name="name" value="${role.name!}" data-options="required:true"></input>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td>角色标签:</td>
+		    			<td><input class="easyui-textbox" type="text" name="label" value="${role.label!}" data-options="required:true"></input></td>
+		    		</tr>
+		    		<tr>
+		    			<td>角色描述:</td>
+		    			<td>
+		    			  <input class="easyui-textbox" name="description" value="${role.description}" data-options="multiline:true" style="height:40px"></input>
+		    			</td>
+		    		</tr>
+		    	</table>
+		    </form>
+            
+            </div>   
+        </div>   
+    </div>   
+    <div data-options="region:'south'" style="height:50px;text-align: center;">
+         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="roleManager.updateRole()">保存</a>
+	 <!--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="">重置</a> -->
+    </div>   
+</div>
+
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/role.js"></script>   
+	
+ 
+ <script type="text/javascript">
+ 
+ $(function(){ //页面加载完毕后触发事件
+	   $('#tt').tree({
+	    checkbox: true,  
+	    lines:true,
+	    animate:true,
+	    cascadeCheck:false,
+	    url: '${rc.contextPath}/role/findResourceTree?rid=${role.id}',
+	    onClick:function(node){ //点击文件节点触发事件
+	    	  $(this).tree('toggle', node.target);
+	    	  var ss=node.attributes.cas.toString();//p1
+	    	  alert('you click '+ss);
+	   	 },
+	   
+	    onCheck: function(node,checked){ //选择复选框触发事件
+		    if(checked){ //当选中时逐级将父节点选中
+				 var parent = $("#tt").tree('getParent', node.target);
+				 if(parent){
+					 $("#tt").tree('check', parent.target);
+				 }
+			
+			 }else{  //当取消时逐级将子节点取消
+				if($("#tt").tree('isLeaf', node.target)){ //import判断是否是叶子节点，否则getChildren会报错。
+					return;
+				}
+				 var children  = $("#tt").tree('getChildren', node.target); 
+						
+			     if(children && children.length>0){
+				    for(var i=0;i<children.length;i++){
+						  $("#tt").tree('uncheck',children[i].target);
+					}	
+				 }
+			}					
+  		}
+	   });
+ 
+});
+		
+</script>
+ 

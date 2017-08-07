@@ -1,0 +1,33 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>二维名名称:</td>
+	    			<td>
+	    			    ${qrCode.name!}
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>网页路径:</td>
+	    			<td>
+	    			  ${qrCode.webUrl!}
+	    			
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>二维码描述:</td>
+	    			<td>
+	    			    ${qrCode.remark!}
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">
+	    			 	<img alt="" width="200px;" height="200px" src="http://localhost:8080/images/qrcode/${qrCode.code}.jpg">
+	    			</td>
+	    		</tr>
+	    		
+	    	</table>
+ </div>
+ 
+ 

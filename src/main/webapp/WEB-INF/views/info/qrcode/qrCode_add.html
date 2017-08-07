@@ -1,0 +1,62 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="qrCode_add_form" action="${rc.contextPath}/qrCode/add" class="easyui-form" method="post" data-options="novalidate:true" >
+	    	<input type="hidden" name="code" value="${qrCode.code}">
+	    	
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>网页路径:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="webUrl"  id="webUrl" data-options="required:true" ></input>
+	    			</td>
+	    		</tr>
+	    		
+	    	<!-- 	<tr>
+	    			<td>参数1:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="param1"></input>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>参数2:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="param2"></input>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>参数3:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="param3"></input>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>参数4:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="param4"></input>
+	    			</td>
+	    		</tr> -->
+	    		
+	    		<tr>
+	    			<td>二维码名称:</td>
+	    			<td><input class="easyui-textbox" type="text" name="name" id="name" data-options="required:true"></input></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>二维码描述:</td>
+	    			<td>
+	    			  <input class="easyui-textbox" name="remark" id="remark" data-options="multiline:true" style="height:40px"></input>
+	    			</td>
+    			</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="qrCodeManager.saveQrCode()">保存</a>
+	    </div>
+ </div>
+
+
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/info/qrCode.js"></script>  
+
+</script>
+ 

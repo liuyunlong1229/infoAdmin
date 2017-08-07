@@ -1,0 +1,71 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="member_detail_form" action="${rc.contextPath}/member/update" class="easyui-form" method="post" data-options="novalidate:true">
+	    	<input type="hidden" name="id" value=${member.id} />
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>姓名:</td>
+	    			<td>
+	    			    ${member.name!}
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>性别:</td>
+	    			<td>
+	    			  <#if member.gender?? && member.gender=='1'> 男 </#if>
+		    		  <#if member.gender?? && member.gender=='0'> 女 </#if>
+	    			
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>会员等级:</td>
+	    			<td>
+	    			  <#if member.type?? && member.type==1> 高级会员</#if>
+		    		  <#if member.type?? && member.type==0> 普通会员 </#if>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>手机:</td>
+	    			<td>${member.mobile!}</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>支付宝号:</td>
+	    			<td>${member.alipayNum!}</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>微信号:</td>
+	    			<td>${member.weChatNum!}</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>email:</td>
+	    			<td>
+	    			 ${member.email!}
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>地址:</td>
+	    			<td>
+	    				${member.address!}
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>发放金额:</td>
+	    			<td>
+	    				${member.sendMoney!}
+	    			</td>
+	    		</tr>
+	    		
+	    	</table>
+	    </form>
+	   <!--  <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="memberManager.sendMoney()">资金发放</a>
+	    </div> -->
+ </div>
+ 
+ 

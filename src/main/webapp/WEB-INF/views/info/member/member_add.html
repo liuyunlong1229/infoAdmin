@@ -1,0 +1,61 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="user_add_form" action="${rc.contextPath}/user/add" class="easyui-form" method="post" data-options="novalidate:true" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>姓名:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="loginName"  data-options="required:true,validType:'remote[\'${rc.contextPath}/user/checkExits\',\'loginName\']'"></input>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>真实姓名:</td>
+	    			<td><input class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>性别:</td>
+	    			<td>
+	    			   
+	    			   <select class="easyui-combobox" name="sex"  data-options="panelHeight:'auto'">
+		    				<option value="1">男</option>
+		    				<option value="0">女</option>
+		    				<option value="-1">未知</option>
+	    				</select>
+	    			
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>电话:</td>
+	    			<td><input class="easyui-textbox" type="text" name="telephone" data-options="required:true,validType:'phone'"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>email:</td>
+	    			<td>
+	    				<input class="easyui-textbox" type="text" name="email" data-options="required:false,validType:'email'"></input>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>地址:</td>
+	    			<td>
+	    				<input class="easyui-textbox" name="address" data-options="multiline:true" style="height:40px"></input>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>角色:</td>
+	    			
+	    			<td>
+	    			  <input class="easyui-combobox" id="roleids" name="roleids" 
+	    			        url='${rc.contextPath}/user/findAllRoles' 
+							data-options="valueField:'id', textField:'text',required:true,multiple:true,panelHeight:'auto'" >
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="userManager.saveUser()">保存</a>
+	    	<!-- <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#user_add_form').form('clear');">清空</a> -->
+	    </div>
+ </div>
+ 

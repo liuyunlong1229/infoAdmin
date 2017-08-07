@@ -1,0 +1,62 @@
+<div style="margin:20px 0;"></div>
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="user_update_form" action="${rc.contextPath}/user/update" class="easyui-form" method="post" data-options="novalidate:true">
+	    	<input type="hidden" name="id" value=${user.id} />
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>用户名:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="loginName" value="${user.loginName!}" disabled="disabled" ></input>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>真实姓名:</td>
+	    			<td><input class="easyui-textbox" type="text" name="realName" value="${user.realName!}" disabled="disabled" ></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>性别:</td>
+	    			<td>
+	    			   
+	    			   <select class="easyui-combobox" name="sex"  data-options="panelHeight:'auto'" >
+		    				<option value="1" <#if user.sex?? && user.sex=='1'> selected </#if> >男</option>
+		    				<option value="0" <#if user.sex?? && user.sex=='0'> selected </#if>>女</option>
+		    				<option value="-1" <#if user.sex?? && user.sex=='-1'> selected </#if>>未知</option>
+	    				</select>
+	    			
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>电话:</td>
+	    			<td><input class="easyui-textbox" type="text" name="telephone" value="${user.telephone!}" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>email:</td>
+	    			<td>
+	    				<input class="easyui-textbox" type="text" name="email" value="${user.email!}" data-options="required:false,validType:'email'"></input>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>地址:</td>
+	    			<td>
+	    				<input class="easyui-textbox" name="address"  value="${user.address!}"  data-options="multiline:true" style="height:40px"></input>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>角色:</td>
+	    			
+	    			<td>
+	    			  <input class="easyui-combobox" id="roleids" name="roleids" 
+	    			        url='${rc.contextPath}/user/findAllRoles?uid=${user.id}'
+							data-options="valueField:'id', textField:'text',required:true,multiple:true,panelHeight:'auto'" >
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="userManager.updateUser()">保存</a>
+	    </div>
+ </div>
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/user.js"></script>   
+ 

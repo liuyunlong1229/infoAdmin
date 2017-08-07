@@ -1,0 +1,44 @@
+<#assign sec=JspTaglibs["/WEB-INF/tld/security.tld"] /> 
+<div class="easyui-panel" data-options="fit:true">
+<div class="easyui-layout" fit="true">
+     	<div region="center" border="false" class="zayBox">
+     	<table id="roledg" class="easyui-datagrid"  
+				data-options="
+					url:'${rc.contextPath}/role/list',
+					rownumbers:true,
+					pagination:true,
+					pageNumber:1,
+                 	pageSize:10,   
+					fit:true,
+					singleSelect:true,
+					toolbar:'#roleToolBar'">
+				<thead>
+					<tr>
+						<th data-options="field:'name',width:'200',align:'center'">角色名称</th>
+						<th data-options="field:'label',width:'200',align:'center'">角色标签</th>
+						<!-- <th data-options="field:'telephone',width:'200',align:'center'">拥有资源</th> -->
+						<th data-options="field:'description',width:'400',align:'center'">角色描述</th>
+					</tr>
+				</thead>
+			</table>
+      </div>
+
+      <div id="roleToolBar">
+      
+       <@sec.hasPermission name="ROLE_ADD">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="roleManager.showAddRoleView()">新增</a>
+       </@sec.hasPermission>
+       
+       <@sec.hasPermission name="ROLE_UPDATE">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'" onclick="roleManager.showUpdateRoleView()">修改</a>
+       </@sec.hasPermission>
+       
+       <@sec.hasPermission name="ROLE_DEL">
+       <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="roleManager.delRole()">删除</a>
+       </@sec.hasPermission> 
+      
+      </div>
+  </div>
+</div>
+<script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/role.js"></script>   
+

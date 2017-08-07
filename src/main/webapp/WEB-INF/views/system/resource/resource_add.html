@@ -1,0 +1,52 @@
+<div style="margin:20px 0;"></div>
+	    <form id="resource_add_form" class="easyui-form" method="post" action="${rc.contextPath}/resource/add" data-options="novalidate:true" style="text-align:center">
+	    	<table cellpadding="5" style="margin: auto">
+	    		<tr>
+	    			<td>父节点名称:</td>
+	    			<td>
+	    				<input class="easyui-textbox" type="text"  name="parentName" value="${parent.name}"  data-options="required:false,disabled:true" />
+	    			    <input type="hidden" name="pid" value="${parent.id}" />
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>资源名称:</td>
+	    			<td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>资源类型:</td>
+	    			<td>
+	    			    <input class="easyui-textbox" type="text" name="resType" value="${resource.resType!}"  data-options="required:true,disabled:true">
+	    			    <input type="hidden" name="resourceType" value="${resource.resourceType!}" />
+	    			</td>
+	    		</tr>
+	    		
+	    		<#if resource.resourceType?? && resource.resourceType=='menu' >
+	    		<tr>
+	    			<td>URL路径：</td>
+	    			<td><input class="easyui-textbox" type="text" name="resourcePath" data-options="required:true,validType:'resource_url'"></input></td>
+	    		</tr>
+	    		</#if>
+	    		
+	    		<#if resource.resourceType?? && resource.resourceType=='button' >
+	    		<tr>
+	    			<td>资源标签：</td>
+	    			<td>
+	    				<input class="easyui-textbox" type="text" name="label" data-options="required:true"></input>
+	    			</td>
+	    		</tr>
+	    		</#if>
+	    		<tr>
+	    			<td>显示序号：</td>
+	    			<td>
+	    				<input class="easyui-textbox" type="text" name="orderNo" data-options="required:true"></input>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="resourceManager.saveResource()">保存</a>
+	    	<!-- <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#resource_add_form').form('clear')">清空</a> -->
+	    </div>
+ </div>
+ <script type="text/javascript" src="${rc.contextPath}/static/js/modules/system/resource.js"></script>   
+ 
